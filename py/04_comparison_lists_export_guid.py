@@ -1,7 +1,7 @@
-### Copyright (c) 2022 Syntegrate
-###
-### This software is released under the MIT License.
-### https://opensource.org/licenses/MIT
+# Copyright (c) 2022 Syntegrate
+#
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
 
 
 import csv
@@ -24,18 +24,18 @@ def isfloat(string):
 
 def readCsv(path):
     aa = []
-    with open (path, 'r', encoding="utf-8") as f:
+    with open(path, 'r', encoding="utf-8") as f:
         reader = csv.reader(f)
         for row in reader:
             new_row = []
             for i in range(len(row)):
-                #cleanup list elm
+                # cleanup list elm
                 r = str(row[i])
-                
+
                 r1 = r.replace("'", "")
                 r2 = r1.replace("[", "")
                 r3 = r2.replace("]", "")
-                
+
                 bool = isfloat(r3)
 
                 if bool is True:
@@ -46,46 +46,46 @@ def readCsv(path):
                     ttt = tt.strip()
                     new_row.append(ttt)
 
-                #delete empty    
-                new_row1 = []    
+                # delete empty
+                new_row1 = []
                 for elem in new_row:
                     if elem != '':
                         new_row1.append(elem)
 
             aa.append(new_row1)
-    print(aa)   
+    print(aa)
     return aa
 
 
 def comparisonOfTwoLists(refList, list1):
     ids = []
 
-    for i in range(len(list1)): 
+    for i in range(len(list1)):
         for j in range(len(refList)):
 
-            #search BK
+            # search BK
             if list1[i] != refList[j] and len(list1[i]) == len(refList[j]):
 
-                #search only blockname and position
+                # search only blockname and position
                 num = int(len(refList[j]) / 4)
 
-                #check block set in reflist and list
+                # check block set in reflist and list
                 tmp_ref_set = []
                 tmp_list_set = []
 
                 for k in range(num):
-                    blcname_id = 1 + k*4
+                    blcname_id = 1 + k * 4
 
                     bkname_r = str(refList[j][blcname_id])
                     bkname_l = str(list1[i][blcname_id])
-                  
+
                     tmp_ref_set.append(bkname_r)
                     tmp_list_set.append(bkname_l)
 
                 if tmp_ref_set == tmp_list_set:
                     for m in range(num):
-                        blcpos_id = 2 + m*4
-                        
+                        blcpos_id = 2 + m * 4
+
                         pos_r = float(refList[j][blcpos_id])
                         pos_l = float(list1[i][blcpos_id])
 
@@ -93,34 +93,25 @@ def comparisonOfTwoLists(refList, list1):
                             blcguid = blcpos_id - 2
                             ids.append(list1[i][blcguid])
 
-
-                            
-
                         else:
                             pass
                 else:
-                    pass        
-                    
+                    pass
+
             else:
                 pass
-                                   
-    #print(ids)        
+
     return ids
 
 
-
 def writeCsv(path, list):
-    with open (path, 'w') as f:
+    with open(path, 'w') as f:
         writer = csv.writer(f, delimiter='\n')
         writer.writerow(list)
     print("done2")
-
 
 
 blclist = readCsv(path6)
 ref = readCsv(path7)
 error_blocks = comparisonOfTwoLists(ref, blclist)
 writeCsv(path8, error_blocks)
-
-
-

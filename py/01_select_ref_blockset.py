@@ -1,7 +1,7 @@
-### Copyright (c) 2022 Syntegrate
-###
-### This software is released under the MIT License.
-### https://opensource.org/licenses/MIT
+# Copyright (c) 2022 Syntegrate
+#
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
 
 import rhinoscriptsyntax as rs
 import csv
@@ -14,6 +14,3 @@ with open(path_ref, 'r') as f:
     reader = csv.reader(f)
     for row in reader:
         rs.SelectObjects(row)
-
-
-
