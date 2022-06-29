@@ -3,10 +3,10 @@
 ### This software is released under the MIT License.
 ### https://opensource.org/licenses/MIT
 
+import itertools
 
 from rhinoscript.geometry import TextDotText
 import rhinoscriptsyntax as rs
-import itertools
 import csv
 from collections import Counter
 
